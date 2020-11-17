@@ -1,0 +1,39 @@
+
+
+goal: detect images that potentially has direct sun-glare condition
+Author: Jing Cheung
+Language: Implementation with Python and django
+
+Questions:
+1. Orientation. Need to clarify more aobut how orientation's role is in this calcualtion
+2. data input
+ 1> read data from database? from a csv file?
+ 2> ommitted the detailed data input implementation here, focused mainly on the isGlare functions
+
+Input: image metadata:
+{
+“lat”: 49.2699648
+“lon”: -123.1290368
+“epoch”: 1588704959.321
+“orientation”: -10.2
+}
+
+- “lat”: a float between 0 to 90 that shows the latitude in which the image was taken
+- “lon”: a float between -180 to 180 that shows the longitude in which the image was taken
+- “epoch”: Linux epoch in second
+- “orientation”: a float between -180 to 180 the east-ward orientation of car travel from true
+north. 0 means north. 90 is east and -90 is west
+
+A glare is judged by:
+1 Azimuthal difference between sun and the direction of the car travel (and hence the
+direction of forward- facing camera) is less than 30 degrees AND
+2 Altitude of the sun is less than 45 degrees. 
+
+analyasys & Solutoin:
+Python algorithm module contains 2 functions
+1. calculate Azimuthal difference
+2. Calculate Altitude, if smaller than 45, return true
+   = 
+   zenithal angle > 45, return true
+
+
